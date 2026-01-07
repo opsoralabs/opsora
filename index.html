@@ -591,6 +591,8 @@
                                                     <p class="text-[10px] uppercase font-black tracking-widest text-neutral-500">Service Core 01</p>
                                                     <p class="text-lg font-bold uppercase tracking-tight group-hover/item:text-white transition-colors">AI Chatbots</p>
                                                 </div>
+
+                                                
                                             </div>
                                             <div class="flex items-center gap-6 group/item transition-all duration-300 hover:translate-x-2">
                                                 <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10 backdrop-blur-md">
@@ -819,23 +821,90 @@
                     </div>
                 `;
             }
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------------SERVICES------------------------->
             function renderServiceDetail(serviceId) {
                 const services = {
                     'ai-chatbots': {
                         title: 'AI Chatbots',
                         subtitle: 'Service Core 01',
-                        description: 'Intelligent conversational agents that understand natural language, qualify leads, and book appointments 24/7.'
+                        description: 'Intelligent conversational agents that understand natural language, qualify leads, and book appointments 24/7.',
+
+                        features: [
+                    {
+                        icon: '<i class="fas fa-brain"></i>',
+                        title: 'NLU Engine',
+                        desc: 'Advanced natural language processing to understand customer intent'
+                    },
+                    {
+                        icon: '<i class="fas fa-clock"></i>',
+                        title: '24/7 Availability',
+                        desc: 'Never miss a lead with round-the-clock automated responses'
+                    },
+                    {
+                        icon: '<i class="fas fa-sync-alt"></i>',
+                        title: 'Multi-platform',
+                        desc: 'Seamless integration with WhatsApp, Web Chat, and Messenger'
+                    },
+                    {
+                        icon: '<i class="fas fa-chart-line"></i>',
+                        title: 'Analytics Dashboard',
+                        desc: 'Real-time insights into conversation metrics and performance'
+                    }
+                ]
                     },
                     'workflow-automation': {
                         title: 'Workflow Automation',
                         subtitle: 'Service Core 02',
-                        description: 'Custom-built automation pipelines that connect your apps, eliminate manual tasks, and orchestrate complex business logic.'
+                        description: 'Custom-built automation pipelines that connect your apps, eliminate manual tasks, and orchestrate complex business logic.',
+                        features: [
+                    {
+                        icon: '<i class="fas fa-project-diagram"></i>',
+                        title: 'Multi-app Integration',
+                        desc: 'Connect Google Sheets, Calendars, CRM, and other tools'
+                    },
+                    {
+                        icon: '<i class="fas fa-cogs"></i>',
+                        title: 'Custom Logic',
+                        desc: 'Build complex conditional workflows tailored to your business'
+                    },
+                    {
+                        icon: '<i class="fas fa-bolt"></i>',
+                        title: 'Real-time Sync',
+                        desc: 'Instant data synchronization across all connected platforms'
+                    },
+                    {
+                        icon: '<i class="fas fa-shield-alt"></i>',
+                        title: 'Error Handling',
+                        desc: 'Automatic fallbacks and notifications for failed processes'
+                    }
+                ]
                     },
                     'enquiry-automation': {
                         title: 'Enquiry Automation',
                         subtitle: 'Service Core 03',
-                        description: 'End-to-end automation of customer enquiries from first contact to conversion, with intelligent routing and follow-up.'
+                        description: 'End-to-end automation of customer enquiries from first contact to conversion, with intelligent routing and follow-up.',
+                         features: [
+                    {
+                        icon: '<i class="fas fa-filter"></i>',
+                        title: 'Lead Qualification',
+                        desc: 'Automatically score and prioritize leads based on intent'
+                    },
+                    {
+                        icon: '<i class="fas fa-tasks"></i>',
+                        title: 'Smart Routing',
+                        desc: 'Route enquiries to appropriate departments or team members'
+                    },
+                    {
+                        icon: '<i class="fas fa-calendar-check"></i>',
+                        title: 'Appointment Booking',
+                        desc: 'Automated scheduling with calendar integration'
+                    },
+                    {
+                        icon: '<i class="fas fa-bell"></i>',
+                        title: 'Follow-up Automation',
+                        desc: 'Conditional reminders and follow-up sequences'
+                    }
+                ]
                     }
                 };
 
