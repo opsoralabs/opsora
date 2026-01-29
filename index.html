@@ -19,6 +19,8 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
+            overflow: auto;
+            padding: 20px;
         }
         
         .a4-container {
@@ -32,12 +34,14 @@
             border: 1px solid #e0e0e0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin: 20px;
+            transition: transform 0.2s ease;
         }
         
         .a4-image {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            transition: transform 0.2s ease;
         }
         
         .footer-text {
@@ -53,16 +57,99 @@
                 width: 90vw;
                 height: calc(90vw * 1.414);
             }
+            
+            body {
+                justify-content: flex-start;
+                padding-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="a4-container">
-        <img src="veri.png" alt="Verification Document" class="a4-image" onerror="this.style.display='none';">
+    <div class="a4-container" id="a4Container">
+        <img src="veri.png" alt="Verification" class="a4-image" id="veriImage" 
+             onerror="document.getElementById('veriImage').style.display='none';">
     </div>
     
     <div class="footer-text">
         This page is maintained for verification and record purposes only
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('a4Container');
+            const image = document.getElementById('veriImage');
+            let scale = 1;
+            
+            // Zoom with mouse wheel
+            container.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                
+                if (e.ctrlKey || e.metaKey) {
+                    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                    scale = Math.max(0.5, Math.min(3, scale + delta));
+                    
+                    image.style.transform = `scale(${scale})`;
+                    container.style.overflow = scale > 1 ? 'auto' : 'hidden';
+                }
+            });
+            
+            // Zoom with touch (pinch)
+            let initialDistance = null;
+            let initialScale = 1;
+            
+            container.addEventListener('touchstart', function(e) {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    initialDistance = getDistance(e.touches[0], e.touches[1]);
+                    initialScale = scale;
+                }
+            });
+            
+            container.addEventListener('touchmove', function(e) {
+                if (e.touches.length === 2 && initialDistance !== null) {
+                    e.preventDefault();
+                    const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                    const newScale = (currentDistance / initialDistance) * initialScale;
+                    
+                    scale = Math.max(0.5, Math.min(3, newScale));
+                    image.style.transform = `scale(${scale})`;
+                    container.style.overflow = scale > 1 ? 'auto' : 'hidden';
+                }
+            });
+            
+            container.addEventListener('touchend', function() {
+                initialDistance = null;
+            });
+            
+            function getDistance(touch1, touch2) {
+                const dx = touch1.clientX - touch2.clientX;
+                const dy = touch1.clientY - touch2.clientY;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            
+            // Zoom with keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    if (e.key === '+' || e.key === '=') {
+                        e.preventDefault();
+                        scale = Math.max(0.5, Math.min(3, scale + 0.1));
+                        image.style.transform = `scale(${scale})`;
+                        container.style.overflow = scale > 1 ? 'auto' : 'hidden';
+                    } else if (e.key === '-' || e.key === '_') {
+                        e.preventDefault();
+                        scale = Math.max(0.5, Math.min(3, scale - 0.1));
+                        image.style.transform = `scale(${scale})`;
+                        container.style.overflow = scale > 1 ? 'auto' : 'hidden';
+                    } else if (e.key === '0') {
+                        e.preventDefault();
+                        scale = 1;
+                        image.style.transform = `scale(${scale})`;
+                        container.style.overflow = 'hidden';
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
